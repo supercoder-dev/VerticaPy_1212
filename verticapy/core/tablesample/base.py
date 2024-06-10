@@ -239,7 +239,7 @@ class TableSample:
                 formatted_text += f"Rows: {rows} | Columns: {n}"
         return formatted_text
 
-    def _repr_html_(self, interactive: bool = False) -> str:
+    def _repr_html_(self, interactive: bool = False, mode: str = "light") -> str:
         if len(self.values) == 0:
             return ""
         n = len(self.values)
@@ -273,6 +273,7 @@ class TableSample:
                 repeat_first_column=("index" in self.values),
                 offset=self.offset,
                 dtype=dtype,
+                mode=mode,
             )
         else:
             formatted_text = print_table(
@@ -283,6 +284,7 @@ class TableSample:
                 return_html=True,
                 dtype=dtype,
                 percent=percent,
+                mode=mode,
             )
         if conf.get_option("footer_on"):
             formatted_text += '<div style="margin-top:6px; font-size:1.02em">'
